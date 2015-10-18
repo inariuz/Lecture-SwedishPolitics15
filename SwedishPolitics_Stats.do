@@ -371,7 +371,7 @@ gr tw (line debt year  if country=="Sweden", lc(black)) ///
 gr tw (line openc year  if country=="Sweden", lc(black)) ///
 	(line oecd_openc year, lc(black) lp(longdash)), ///
 	xline(1991, lc(red) lp(shortdash)) xline(1995, lc(red) lp(longdash)) ///
-	ytitle("Openness to trade (export + import, % GDP)") xtitle("Year") ///
+	ytitle("Openness to trade (export + import, % GDP)") xtitle(" ") ///
 	leg(order(1 "Sweden" 2 "OECD (excl. SE)"))
 
 * Iceland
