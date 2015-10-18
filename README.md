@@ -1,5 +1,5 @@
 Lecture-SwedishPolitics15
-=========================
+-------------------------
 
-Lecture on Swedish EU-relations
--------------------------------
+### Lecture on Swedish EU-relations
+
