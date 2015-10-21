@@ -141,7 +141,7 @@ label define cntry 1 "Austria" 2 "Belgium" 3 "Denmark" 4 "Finland" 5 "France" //
 sort country year
 	
 * Only cases with a decision
-keep if decision==1 | decision==2
+*keep if decision==1 | decision==2
 
 collapse (sum) agri (sum) freemove (sum) compet (sum) external ///
 	 (sum) socsec (sum) socpriv (sum) environ (sum) estab ///
@@ -155,14 +155,15 @@ drop if country==. | year==.
 egen allcases=rowtotal(agri freemove compet external ///
 	socsec socpriv environ estab tax transprt commpolc apprxlaw)
 	
-gr tw (line allcases year if country==14, lp(solid)) ///
-	(spike socsec year if country==14, lc(red)) ///
-	(spike tax year if country==14, lc(blue)) ///
-	(spike environ year if country==14, lc(green)), ///
+gr tw (line allcases year if country==14, lp(solid) lw(medthick)) ///
+	(spike socsec year if country==14, lc(red) lw(thick)) ///
+	(spike tax year if country==14, lc(blue) lw(thick)) ///
+	(spike environ year if country==14, lc(green) lw(thick)), ///
 	leg(r(2) order(1 "Total" 2 "Social security" ///
 	3 "Taxation" 4 "Environment")) ///
-	ytitle("Number of ECJ rulings & orders") ///
+	ytitle("Number of ECJ Art. 234 references") ///
 	xtitle(" ")
+	gr export ecj234_se.pdf, replace
 	
 * Overall number of cases per year
 use "${no}/Uni/PhD Lund/Teaching/Swedish Politics/Stone Sweet_Brunell/Art_234.dta", ///
@@ -179,27 +180,20 @@ label define cntry 1 "Austria" 2 "Belgium" 3 "Denmark" 4 "Finland" 5 "France" //
 	ren filedate year
 	label var year "File date"
 	
-sort country year
-	
-collapse (sum) agri (sum) freemove (sum) compet (sum) external ///
-	 (sum) socsec (sum) socpriv (sum) environ (sum) estab ///
-	  (sum) tax (sum) transprt (sum) commpolc  (sum) apprxlaw, ///
-	  by(country year)
-	  
 drop if country==. | year==.
 	sort country year
-	xtset country year
+	
+*keep if decision==1 | decision==2
 
-egen allcases=rowtotal(agri freemove compet external ///
-	socsec socpriv environ estab tax transprt commpolc apprxlaw)
+gen allcases=1
 	
 collapse (sum) allcases, by(year)
 
-gr tw line allcases year if year<2006, ///
-	ytitle("Number of ECJ rulings & orders") ///
+gr tw line allcases year if year<2007, ///
+	ytitle("Number of ECJ Art. 234 references per year") ///
 	xtitle(" ")
-	* why is there a hump after ~1994?
-	
+	gr export ecj234.pdf, replace
+
 	
 * Kšnig/Luetgert BJPS Compliance dataset
 ****************************************
