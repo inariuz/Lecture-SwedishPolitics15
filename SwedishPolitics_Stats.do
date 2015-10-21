@@ -157,7 +157,7 @@ egen allcases=rowtotal(agri freemove compet external ///
 	
 gr tw (line allcases year if country==14, lp(solid) lw(medthick)) ///
 	(spike socsec year if country==14, lc(red) lw(thick)) ///
-	(spike tax year if country==14, lc(blue) lw(thick)) ///
+	(spike tax year if country==14, lc(gold) lw(thick)) ///
 	(spike environ year if country==14, lc(green) lw(thick)), ///
 	leg(r(2) order(1 "Total" 2 "Social security" ///
 	3 "Taxation" 4 "Environment")) ///
